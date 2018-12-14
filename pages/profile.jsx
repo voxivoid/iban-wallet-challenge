@@ -1,8 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 
 import FormEmail from "../components/FormEmail";
 
-export default class extends React.Component {
+const ProfileWrapper = styled.div`
+  padding: 32px;
+  min-height: 100vh;
+`;
+
+export default class Profile extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,6 +22,10 @@ export default class extends React.Component {
   }
 
   render() {
-    return <FormEmail />;
+    return (
+      <ProfileWrapper>
+        <FormEmail />
+      </ProfileWrapper>
+    );
   }
 }

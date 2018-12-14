@@ -2,6 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+export default function Button(props) {
+  const { text, disabled } = props;
+  return <CustomButton type="button" disabled={disabled}>{ text }</CustomButton>;
+}
+
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  disabled: false,
+};
+
 const CustomButton = styled.button`
   width: 240px;
   height: 64px;
@@ -17,17 +31,3 @@ const CustomButton = styled.button`
     }`
   )}
 `;
-
-export default function Button(props) {
-  const { text, disabled } = props;
-  return <CustomButton type="button" disabled={disabled}>{ text }</CustomButton>;
-}
-
-Button.propTypes = {
-  text: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  disabled: false,
-};
