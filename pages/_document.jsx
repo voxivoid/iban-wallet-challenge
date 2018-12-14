@@ -1,21 +1,8 @@
 import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
-// Import styled components ServerStyleSheet
-import { ServerStyleSheet, createGlobalStyle } from "styled-components";
+import { ServerStyleSheet } from "styled-components";
 
-const Font = createGlobalStyle`
-  @font-face {
-    font-family: "CircularStd";
-    src: url('/static/fonts/CircularStd-Book.woff') format('woff');
-    src: url('/static/fonts/CircularStd-BookItalic.woff') format('woff');
-    src: url('/static/fonts/CircularStd-Medium.woff') format('woff');
-    src: url('/static/fonts/CircularStd-MediumItalic.woff') format('woff');
-    src: url('/static/fonts/CircularStd-Bold.woff') format('woff');
-    src: url('/static/fonts/CircularStd-BoldItalic.woff') format('woff');
-    src: url('/static/fonts/CircularStd-Black.woff') format('woff');
-    src: url('/static/fonts/CircularStd-BlackItalic.woff') format('woff');
-  }
-`;
+import Typography from "../components/Typography";
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -36,7 +23,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          <Font />
+          <Typography />
           {/* Step 5: Output the styles in the head  */}
           {this.props.styleTags}
         </Head>
