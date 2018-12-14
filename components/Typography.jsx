@@ -49,6 +49,8 @@ export default createGlobalStyle`
   }
 
   body {
+    margin: 0;
+
     h1 {
       font-size: 36px;
       line-height: 34px;

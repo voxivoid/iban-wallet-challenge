@@ -6,6 +6,7 @@ import FormEmail from "../components/FormEmail";
 const ProfileWrapper = styled.div`
   padding: 32px;
   min-height: 100vh;
+  box-sizing: border-box;
 `;
 
 export default class Profile extends React.Component {
