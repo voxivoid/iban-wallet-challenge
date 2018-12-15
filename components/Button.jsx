@@ -24,15 +24,10 @@ const CustomButton = styled.button`
 `;
 
 export default function Button(props) {
-  const { text, disabled } = props;
-  return <CustomButton type="button" disabled={disabled}>{ text }</CustomButton>;
+  const { text } = props;
+  return <CustomButton type="button" {...props}>{ text }</CustomButton>;
 }
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  disabled: false,
 };

@@ -11,40 +11,47 @@ const CustomInput = styled(Input)`
 `;
 
 export default class FormEmail extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: "",
-    };
+  onChangeEmail = (event) => {
+    this.setFormModel({ email: event.target.value });
   }
 
-  onChangeEmail = (event) => {
-    this.setState({ email: event.target.value }, this.validateForm);
+  setFormModel(newState) {
+    const { model, setFormModel } = this.props;
+
+    setFormModel(Object.assign({}, model, newState), this.validate);
   }
 
   isEmailValid = () => {
-    const { email } = this.state;
-    return emailValidator.validate(email);
+    const { model } = this.props;
+    return emailValidator.validate(model.email);
   }
 
-
-  validateForm = () => {
-    const { setFormValidState } = this.props;
-    setFormValidState(this.isEmailValid());
-  }
+  validate = () => this.isEmailValid()
 
   render() {
-    const { email } = this.state;
+    const { model } = this.props;
 
     return (
       <Form title="What’s your email address?" subTitle="We’ll send you a confirmation email and you’ll use it to log in later.">
-        <CustomInput type="text" placeholder="e.g. jane.doe@email" value={email} onChange={this.onChangeEmail} isValid={this.isEmailValid()} />
+        <CustomInput
+          type="text"
+          placeholder="e.g. jane.doe@email"
+          value={model.email}
+          onChange={this.onChangeEmail}
+          isValid={this.isEmailValid()}
+        />
       </Form>
     );
   }
 }
 
 FormEmail.propTypes = {
-  setFormValidState: PropTypes.func.isRequired,
+  model: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  }),
+  setFormModel: PropTypes.func.isRequired,
+};
+
+FormEmail.defaultProps = {
+  model: { email: "" },
 };

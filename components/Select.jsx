@@ -59,7 +59,7 @@ const customStyles = {
     marginTop: "10px",
     color: "#838383",
     border: "1px solid #0a0f35",
-    width: window.innerWidth >= 551 ? "360px" : "100%", // eslint-disable-line no-undef
+    width: window.innerWidth >= 551 ? "360px" : "100%",
     borderRadius: "0",
   }),
 };
@@ -81,9 +81,9 @@ Select.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.shape({
-    value: PropTypes.string,
-    label: PropTypes.string,
-  }),
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
@@ -94,5 +94,4 @@ Select.propTypes = {
 Select.defaultProps = {
   label: null,
   placeholder: null,
-  value: "",
 };

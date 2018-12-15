@@ -50,14 +50,14 @@ const ContinueRow = styled(Row)`
 `;
 
 export default function NavigationButtons(props) {
-  const { continueDisabled } = props;
+  const { continueDisabled, onPrevious, onContinue } = props;
 
   return (
     <Container>
-      <Previous>Previous</Previous>
+      <Previous onClick={onPrevious}>Previous</Previous>
       <ContinueRow>
         <PressEnter disabled={continueDisabled}>Press Enter or</PressEnter>
-        <Button text="Continue" disabled={continueDisabled} />
+        <Button onClick={onContinue} text="Continue" disabled={continueDisabled} />
       </ContinueRow>
     </Container>
   );
@@ -65,6 +65,8 @@ export default function NavigationButtons(props) {
 
 NavigationButtons.propTypes = {
   continueDisabled: PropTypes.bool,
+  onPrevious: PropTypes.func.isRequired,
+  onContinue: PropTypes.func.isRequired,
 };
 
 NavigationButtons.defaultProps = {

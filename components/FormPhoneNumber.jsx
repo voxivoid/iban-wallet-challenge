@@ -29,13 +29,11 @@ const CustomSelect = styled(Select)`
   }
 `;
 
-export default class FormEmail extends React.Component {
+export default class FormPhoneNumber extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      countryCode: null,
-      phoneNumber: "",
       countryCodes: [
         {
           value: "+351",
@@ -50,42 +48,77 @@ export default class FormEmail extends React.Component {
   }
 
   onChangeCountryCode = (countryCode) => {
-    this.setState({ countryCode }, this.validateForm);
+    this.setFormModel({ countryCode });
   }
 
   onChangePhoneNumber = (event) => {
-    this.setState({ phoneNumber: event.target.value }, this.validateForm);
+    this.setFormModel({ phoneNumber: event.target.value });
+  }
+
+  setFormModel(newState) {
+    const { model, setFormModel } = this.props;
+
+    setFormModel(Object.assign({}, model, newState), this.validate);
   }
 
   isPhoneNumberValid = () => {
-    const { phoneNumber } = this.state;
-    return phoneNumber.length === 9;
+    const { model } = this.props;
+    return model.phoneNumber.length >= 9;
   }
 
   isCountryCodeValid = () => {
-    const { countryCode } = this.state;
-    return !!countryCode;
+    const { model } = this.props;
+    return !!model.countryCode.value;
   }
 
-  validateForm = () => {
-    const { setFormValidState } = this.props;
-    setFormValidState(this.isPhoneNumberValid() && this.isCountryCodeValid());
-  }
+  validate = () => this.isPhoneNumberValid() && this.isCountryCodeValid()
 
   render() {
-    const { phoneNumber, countryCode, countryCodes } = this.state;
+    const { model } = this.props;
+    const { countryCodes } = this.state;
 
     return (
       <Form title="What’s your phone number?" subTitle="Your phone number will be used to link your account and to log into the app.">
         <CustomRow>
-          <CustomSelect instanceId="countryCode" label="Country" value={countryCode} options={countryCodes} onChange={this.onChangeCountryCode} isValid={this.isCountryCodeValid()} />
-          <CustomInput label="Phone Number" type="text" placeholder="123456789" value={phoneNumber} onChange={this.onChangePhoneNumber} isValid={this.isPhoneNumberValid()} />
+          <CustomSelect
+            instanceId="countryCode"
+            label="Country"
+            value={model.countryCode}
+            options={countryCodes}
+            onChange={this.onChangeCountryCode}
+            isValid={this.isCountryCodeValid()}
+          />
+          <CustomInput
+            label="Phone Number"
+            type="text"
+            placeholder="123456789"
+            value={model.phoneNumber}
+            onChange={this.onChangePhoneNumber}
+            isValid={this.isPhoneNumberValid()}
+          />
         </CustomRow>
       </Form>
     );
   }
 }
 
-FormEmail.propTypes = {
-  setFormValidState: PropTypes.func.isRequired,
+FormPhoneNumber.propTypes = {
+  model: PropTypes.shape({
+    countryCode: PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+    phoneNumber: PropTypes.string.isRequired,
+  }),
+  setFormModel: PropTypes.func.isRequired,
+};
+
+FormPhoneNumber.defaultProps = {
+  model: {
+    countryCode: {
+      value: "",
+      label: "",
+    },
+    phoneNumber: "",
+  },
 };
