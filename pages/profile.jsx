@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import FormEmail from "../components/FormEmail";
+import FormPhoneNumber from "../components/FormPhoneNumber";
 import NavigationButtons from "../components/NavigationButtons";
 
 const ProfileWrapper = styled.div`
@@ -30,7 +31,8 @@ export default class Profile extends React.Component {
     const { isFormValid } = this.state;
     return (
       <ProfileWrapper>
-        <FormEmail setFormValidState={this.setFormValidState} />
+        <FormPhoneNumber setFormValidState={this.setFormValidState} />
+        {/* <FormEmail setFormValidState={this.setFormValidState} /> */}
         <NavigationButtons continueDisabled={!isFormValid} />
       </ProfileWrapper>
     );
