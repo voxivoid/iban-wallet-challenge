@@ -6,6 +6,7 @@ import Column from "./Column";
 
 const CustomColumn = styled(Column)`
   flex-direction: column-reverse;
+  width: 100%;
 `;
 
 const Label = styled.label`
@@ -37,10 +38,10 @@ const CustomInput = styled.input`
 `;
 
 export default function Input(props) {
-  const { label } = props;
+  const { label, className } = props;
 
   return (
-    <CustomColumn>
+    <CustomColumn className={className}>
       <CustomInput {...props} />
       {label && <Label>{label}</Label>}
     </CustomColumn>

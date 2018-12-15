@@ -12,6 +12,7 @@ const ProfileWrapper = styled.div`
   box-sizing: border-box;
   display: grid;
   grid-template-rows: 1fr auto;
+  grid-gap: 20px 0;
 `;
 
 export default class Profile extends React.Component {

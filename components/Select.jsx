@@ -7,6 +7,7 @@ import Column from "./Column";
 
 const CustomColumn = styled(Column)`
   flex-direction: column-reverse;
+  width: 100%;
 `;
 
 const Label = styled.label`
@@ -17,6 +18,7 @@ const Label = styled.label`
 
 const CustomSelect = styled(ReactSelect)`
   font-family: Circular Std;
+  width: 100%;
 
   & > div {
     padding: 0;
@@ -27,6 +29,7 @@ const CustomSelect = styled(ReactSelect)`
     height: 60px;
     border-radius: 0;
   }
+
   .react-select__control--is-focused {
     box-shadow: none;
 
@@ -51,20 +54,23 @@ const CustomSelect = styled(ReactSelect)`
 `;
 
 const customStyles = {
-  menu: () => ({
+  menu: provide => ({
+    ...provide,
+    marginTop: "10px",
     color: "#838383",
     border: "1px solid #0a0f35",
-    width: "360px",
+    width: window.innerWidth >= 551 ? "360px" : "100%", // eslint-disable-line no-undef
+    borderRadius: "0",
   }),
 };
 
 export default function Select(props) {
-  const { label } = props;
+  const { label, className } = props;
 
   // setTimeout(() => { debugger; }, 5000);
 
   return (
-    <CustomColumn>
+    <CustomColumn className={className}>
       <CustomSelect styles={customStyles} classNamePrefix="react-select" {...props} />
       {label && <Label>{label}</Label>}
     </CustomColumn>

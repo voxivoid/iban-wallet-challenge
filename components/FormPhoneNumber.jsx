@@ -10,16 +10,21 @@ import Select from "./Select";
 
 const CustomRow = styled(Row)`
   align-items: start;
+  flex-wrap: wrap;
 `;
 
 const CustomInput = styled(Input)`
-  max-width: 220px;
+  @media(min-width: 551px) {
+    max-width: 220px;
+  }
 `;
 
 const CustomSelect = styled(Select)`
-  max-width: 120px;
+  margin-bottom: 20px;
 
   @media(min-width: 551px) {
+    margin-bottom: 0px;
+    max-width: 120px;
     margin-right: 20px;
   }
 `;
