@@ -31,17 +31,31 @@ class Profile extends React.Component {
   }
 
   onContinue = () => {
-    const { currentForm, formEmailModel, formPhoneNumberModel } = this.state;
+    const {
+      currentForm,
+      isFormValid,
+      formEmailModel,
+      formPhoneNumberModel,
+    } = this.state;
     const { dispatch } = this.props;
 
-    if (currentForm === "email") {
-      this.setState({ currentForm: "phoneNumber" });
-      dispatch(setEmail(formEmailModel.email));
-    }
+    if (isFormValid) {
+      if (currentForm === "email") {
+        this.setState({ currentForm: "phoneNumber" });
+        dispatch(setEmail(formEmailModel.email));
+      }
 
-    if (currentForm === "phoneNumber") {
-      dispatch(setCountryCode(formPhoneNumberModel.countryCode.value));
-      dispatch(setPhoneNumber(formPhoneNumberModel.phoneNumber));
+      if (currentForm === "phoneNumber") {
+        dispatch(setCountryCode(formPhoneNumberModel.countryCode.value));
+        dispatch(setPhoneNumber(formPhoneNumberModel.phoneNumber));
+      }
+    }
+  }
+
+  onEnter = (event) => {
+    console.log(event.key);
+    if (event.key === "Enter") {
+      this.onContinue();
     }
   }
 
@@ -62,7 +76,7 @@ class Profile extends React.Component {
     } = this.state;
 
     return (
-      <ProfileWrapper>
+      <ProfileWrapper onKeyPress={this.onEnter} tabIndex="0">
         {currentForm === "email"
         && (
         <FormEmail

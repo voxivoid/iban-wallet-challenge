@@ -14,7 +14,7 @@ export default function Form(props) {
   const { title, subTitle, children } = props;
 
   return (
-    <form>
+    <form onSubmit={event => event.preventDefault()}>
       <h1>{title}</h1>
       <H2>{subTitle}</H2>
       {children}
