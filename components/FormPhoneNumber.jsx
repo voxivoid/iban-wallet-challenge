@@ -49,8 +49,8 @@ export default class FormEmail extends React.Component {
     };
   }
 
-  onChangeCountryCode = (event) => {
-    this.setState({ countryCode: event.target.value }, this.validateForm);
+  onChangeCountryCode = (countryCode) => {
+    this.setState({ countryCode }, this.validateForm);
   }
 
   onChangePhoneNumber = (event) => {
@@ -79,7 +79,7 @@ export default class FormEmail extends React.Component {
       <Form title="What’s your phone number?" subTitle="Your phone number will be used to link your account and to log into the app.">
         <CustomRow>
           <CustomSelect instanceId="countryCode" label="Country" value={countryCode} options={countryCodes} onChange={this.onChangeCountryCode} isValid={this.isCountryCodeValid()} />
-          <CustomInput label="Phone Number" type="text" placeholder="123456789" value={phoneNumber} onChange={this.onChangePhoneNumber} isValid={this.isCountryCodeValid()} />
+          <CustomInput label="Phone Number" type="text" placeholder="123456789" value={phoneNumber} onChange={this.onChangePhoneNumber} isValid={this.isPhoneNumberValid()} />
         </CustomRow>
       </Form>
     );
