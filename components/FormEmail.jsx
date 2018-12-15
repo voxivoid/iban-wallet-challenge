@@ -1,8 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import emailValidator from "email-validator";
 
 import Form from "./Form";
-import Button from "./Button";
 import Input from "./Input";
+
+const CustomInput = styled(Input)`
+  max-width: 540px;
+`;
 
 export default class FormEmail extends React.Component {
   constructor(props) {
@@ -10,22 +16,35 @@ export default class FormEmail extends React.Component {
 
     this.state = {
       email: "",
-      disabled: true,
     };
   }
 
   onChangeEmail = (event) => {
-    this.setState({ email: event.target.value });
+    this.setState({ email: event.target.value }, this.validateForm);
+  }
+
+  isEmailValid = () => {
+    const { email } = this.state;
+    return emailValidator.validate(email);
+  }
+
+
+  validateForm = () => {
+    const { setFormValidState } = this.props;
+    setFormValidState(this.isEmailValid());
   }
 
   render() {
-    const { email, disabled } = this.state;
+    const { email } = this.state;
 
     return (
       <Form title="What’s your email address?" subTitle="We’ll send you a confirmation email and you’ll use it to log in later.">
-        <Input type="text" placeholder="e.g. jane.doe@email" value={email} onChange={this.onChangeEmail} />
-        <Button text="Continue" disabled={disabled} />
+        <CustomInput type="text" placeholder="e.g. jane.doe@email" value={email} onChange={this.onChangeEmail} isValid={this.isEmailValid()} />
       </Form>
     );
   }
 }
+
+FormEmail.propTypes = {
+  setFormValidState: PropTypes.func.isRequired,
+};

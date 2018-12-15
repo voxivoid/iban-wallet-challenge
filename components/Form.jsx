@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const H2 = styled.h2`
-  margin-bottom: 100px;
+  margin-bottom: 50px;
+
+  @media(min-width: 551px) {
+    margin-bottom: 100px;
+  }
 `;
 
-
-export default function Input(props) {
+export default function Form(props) {
   const { title, subTitle, children } = props;
 
   return (
@@ -19,7 +22,7 @@ export default function Input(props) {
   );
 }
 
-Input.propTypes = {
+Form.propTypes = {
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
