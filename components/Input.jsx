@@ -23,6 +23,7 @@ const CustomInput = styled.input`
   padding: 0 18px;
   box-sizing: border-box;
   transition: all .2s ease;
+  outline: none;
 
   &::placeholder {
     color: #afafaf;
