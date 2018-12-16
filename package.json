@@ -7,7 +7,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "eslint": "eslint --ext .js,.jsx --ignore-path .gitignore --fix ."
+    "eslint": "eslint --ext .js,.jsx --ignore-path .gitignore --fix .",
+    "heroku-postbuild": "npm run build",
   },
   "author": "André Domingues",
   "license": "ISC",
