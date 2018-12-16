@@ -37,7 +37,7 @@ class Profile extends React.Component {
       formEmailModel,
       formPhoneNumberModel,
     } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch } = this.props; // eslint-disable-line react/prop-types
 
     if (isFormValid) {
       if (currentForm === "email") {

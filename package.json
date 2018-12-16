@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "eslint": "eslint --ext .js,.jsx --ignore-path .gitignore --fix ."
   },
   "author": "André Domingues",
   "license": "ISC",

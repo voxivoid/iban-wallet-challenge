@@ -67,8 +67,6 @@ const customStyles = {
 export default function Select(props) {
   const { label, className } = props;
 
-  // setTimeout(() => { debugger; }, 5000);
-
   return (
     <CustomColumn className={className}>
       <CustomSelect styles={customStyles} classNamePrefix="react-select" {...props} />

@@ -24,7 +24,7 @@ export default App => class AppWithRedux extends React.Component {
     const reduxStore = getOrCreateStore();
 
     // Provide the store to getInitialProps of pages
-    appContext.ctx.reduxStore = reduxStore;
+    appContext.ctx.reduxStore = reduxStore; // eslint-disable-line no-param-reassign
 
     let appProps = {};
     if (typeof App.getInitialProps === "function") {
