@@ -53,7 +53,6 @@ class Profile extends React.Component {
   }
 
   onEnter = (event) => {
-    console.log(event.key);
     if (event.key === "Enter") {
       this.onContinue();
     }

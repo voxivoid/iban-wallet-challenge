@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 import Row from "./Row";
 import Form from "./Form";
@@ -29,7 +30,7 @@ const CustomSelect = styled(Select)`
   }
 `;
 
-export default class FormPhoneNumber extends React.Component {
+class FormPhoneNumber extends React.Component {
   constructor(props) {
     super(props);
 
@@ -45,6 +46,18 @@ export default class FormPhoneNumber extends React.Component {
         },
       ],
     };
+  }
+
+  componentDidMount() {
+    const { state } = this.props; // eslint-disable-line react/prop-types
+    const { countryCodes } = this.state;
+
+    const countryCode = countryCodes.find(code => code.value === state.countryCode);
+
+    this.setFormModel({
+      phoneNumber: state.phoneNumber || FormPhoneNumber.defaultProps.model.phoneNumber,
+      countryCode: countryCode || FormPhoneNumber.defaultProps.model.countryCode,
+    });
   }
 
   onChangeCountryCode = (countryCode) => {
@@ -63,7 +76,7 @@ export default class FormPhoneNumber extends React.Component {
 
   isPhoneNumberValid = () => {
     const { model } = this.props;
-    return model.phoneNumber.length >= 9;
+    return /^\d{9,}$/.test(model.phoneNumber);
   }
 
   isCountryCodeValid = () => {
@@ -122,3 +135,11 @@ FormPhoneNumber.defaultProps = {
     phoneNumber: "",
   },
 };
+
+function mapStateToProps(state) {
+  return {
+    state,
+  };
+}
+
+export default connect(mapStateToProps)(FormPhoneNumber);

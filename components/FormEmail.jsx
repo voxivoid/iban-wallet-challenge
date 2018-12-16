@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import emailValidator from "email-validator";
+import { connect } from "react-redux";
 
 import Form from "./Form";
 import Input from "./Input";
@@ -10,7 +11,15 @@ const CustomInput = styled(Input)`
   max-width: 540px;
 `;
 
-export default class FormEmail extends React.Component {
+class FormEmail extends React.Component {
+  componentDidMount() {
+    const { state } = this.props; // eslint-disable-line react/prop-types
+
+    this.setFormModel({
+      email: state.email || FormEmail.defaultProps.model.email,
+    });
+  }
+
   onChangeEmail = (event) => {
     this.setFormModel({ email: event.target.value });
   }
@@ -55,3 +64,12 @@ FormEmail.propTypes = {
 FormEmail.defaultProps = {
   model: { email: "" },
 };
+
+function mapStateToProps(state) {
+  return {
+    state,
+  };
+}
+
+
+export default connect(mapStateToProps)(FormEmail);
