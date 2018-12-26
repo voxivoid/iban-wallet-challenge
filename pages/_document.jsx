@@ -25,6 +25,7 @@ export default class MyDocument extends Document {
         <Head>
           <Typography />
           {/* Step 5: Output the styles in the head  */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           {this.props.styleTags}
         </Head>
         <body>
